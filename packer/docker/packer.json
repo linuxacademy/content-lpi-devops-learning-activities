@@ -1,0 +1,38 @@
+{
+  "variables": {
+    "repository": "la/express",
+    "tag": "1.0"
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "author": "Travis Thomsen",
+      "image": "node",
+      "commit": true,
+      "changes": [
+        "EXPOSE 3000"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "apt-get update -y && apt-get install curl -y",
+        "mkdir -p /var/code",
+        "cd /root",
+        "curl -L https://github.com/linuxacademy/content-nodejs-hello-world/archive/v1.0.tar.gz -o code.tar.gz",
+        "tar zxvf code.tar.gz -C /var/code --strip-components=1",
+        "cd /var/code",
+        "npm install"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-tag",
+      "repository": "{{user `repository`}}",
+      "tag": "{{user `tag`}}"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  db:
+     image: mysql:5.7
+     volumes:
+         - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: R00tP4ssw0rd
+       MYSQL_DATABASE: app_name
+       MYSQL_USER: db_user
+       MYSQL_PASSWORD: 4pp_n4meP4sswrd0!
+  webapp:
+    image: php:7.0-apache
+    volumes:
+      - app_data:/var/www/html
+      - app_logs:/var/logs/apache2
+    restart: always
+    links:
+      - db
+volumes:
+  db_data:
+  app_data:
+  app_logs:

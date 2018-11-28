@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: replicaset-demo
+  template:
+    metadata:
+      labels:
+        app: replicaset-demo
+    spec:
+      containers:
+      - name: nginx-demo
+        image: nginx:latest
+        imagePullPolicy: Always

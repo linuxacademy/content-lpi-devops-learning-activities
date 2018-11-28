@@ -1,0 +1,2 @@
+docker build . -t la/static:latest
+docker run -d --name=static-site -p 80:80 la/static:latest

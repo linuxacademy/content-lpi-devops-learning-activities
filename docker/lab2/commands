@@ -1,0 +1,7 @@
+docker build -t la/static-site:latest -f Dockerfile .
+docker volume create nginx-code
+docker volume create nginx-logs
+docker run -d --name=static-site -p 80:80 \
+ --mount source=nginx-code,target=/usr/share/nginx/html \
+ --mount source=nginx-logs,target=/var/log/nginx \
+ la/static-site:latest

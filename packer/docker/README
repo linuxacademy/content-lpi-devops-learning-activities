@@ -1,0 +1,3 @@
+packer build -var 'repository=la/express' -va 'tag=0.0.1' packer.json
+
+docker run -dt -p 80:3000 la/express:0.0.1 node /var/code/bin/www

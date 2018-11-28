@@ -1,0 +1,3 @@
+docker network create app-bridge
+docker ls
+docker run -dt --name my-app --network app-bridge nginx:latest

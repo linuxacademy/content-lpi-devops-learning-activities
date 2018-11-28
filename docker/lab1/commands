@@ -1,0 +1,1 @@
+docker build -t la/app-node -f Dockerfile .

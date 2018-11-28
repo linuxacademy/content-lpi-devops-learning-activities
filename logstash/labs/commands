@@ -1,0 +1,70 @@
+Setup
+
+yum install java -y
+rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+vi /etc/yum.repos.d/logstash.repo
+
+[logstash-6.x]
+name=Elastic repository for 6.x packages
+baseurl=https://artifacts.elastic.co/packages/6.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+
+
+
+
+Installing Elasticsearch
+
+yum install elasticsearch -y
+systemctl enable elasticsearch
+
+vi /etc/elasticsearch/elasticsearch.yml
+node.name: master1
+...
+network.host: "localhost"
+
+systemctl start elasticsearch
+
+
+
+
+
+Installing Logstash
+
+yum install logstash -y
+systemctl enable logstash
+vi /etc/logstash/conf.d/syslog.conf
+
+systemctl start logstash
+
+
+
+
+Installing Filebeat
+yum install filebeat -y
+
+filebeat setup
+
+vi /etc/filebeat/filebeat.yml
+#output.elasticsearch:
+  #hosts: ["localhost:9200"]
+...
+output.logstash:
+  hosts: ["localhost:5044"]
+
+filebeat modules enable system
+service filebeat start
+
+
+
+Installing Kibana
+
+yum install -y kibana
+systemctl enable kibana
+systemctl start kibana
+
+ssh cloud_user@54.159.126.134 -L 5601:localhost:5601
+QfLBHVVTli

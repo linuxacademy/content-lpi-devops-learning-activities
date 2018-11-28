@@ -1,0 +1,6 @@
+ifconfig
+docker swarm init --advertise-addr <PRIVATE_IP>
+docker swarm join --token <TOKEN>
+
+docker pull httpd
+docker service create --name our_api --replicas=2 httpd:latest

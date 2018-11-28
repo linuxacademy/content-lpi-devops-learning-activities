@@ -1,0 +1,10 @@
+adduser ansible
+passwd ansible
+visudo
+ssh-keygen
+ssh-copy-id 10.0.1.101
+vi /etc/ansible/hosts
+
+ansible-playbook /home/cloud_user/playbook.yml
+
+elinks
